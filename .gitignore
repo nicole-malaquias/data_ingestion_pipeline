@@ -22,3 +22,32 @@ Thumbs.db
 # Ignore pastas do Airflow
 logs/
 airflow.db
+
+# Diretórios e arquivos do Terraform
+.terraform/             # Diretório com plugins e arquivos temporários
+.terraform.lock.hcl     # Lockfile (opcional, mas recomendado versionar para controle de provedor)
+
+# Arquivos de variáveis sensíveis
+*.tfvars               # Arquivos com variáveis (geralmente contêm senhas e tokens)
+*.tfvars.json          # Variáveis em JSON
+secret.auto.tfvars     # Convenção para variáveis automáticas confidenciais
+
+# Arquivos de estado e backups (contêm dados sensíveis)
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.*            # Estados remotos e locais
+
+# Credenciais e tokens
+*.pem
+*.key
+*.crt
+*.p12
+*.json                 # Inclui arquivos como o token.json (evita subir credenciais do GCP)
+!example*.json         # Permite arquivos de exemplo (como example_credentials.json)
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+.DS_Store              
