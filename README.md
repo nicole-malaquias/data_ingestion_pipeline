@@ -10,7 +10,12 @@ Base: basedosdados.br_inep_saeb.aluno_ef_9ano
 Frequência de Atualização dos Dados: Bienal (a cada 2 anos)
 
 ## Arquitetura do Projeto
-O projeto é orquestrado com Apache Airflow e utiliza o Docker para garantir portabilidade e fácil deploy. O processamento de dados é realizado com PySpark e a validação é feita com Great Expectations.
+
+O projeto é orquestrado com Apache Airflow, garantindo o agendamento e monitoramento das pipelines de dados. A infraestrutura é provisionada automaticamente na nuvem usando Terraform, permitindo o gerenciamento eficiente e reprodutível dos recursos na cloud. O ambiente é containerizado com Docker para assegurar portabilidade, consistência e facilidade no deploy. O processamento dos dados é realizado com PySpark, enquanto a validação e garantia de qualidade dos dados são feitas com Great Expectations.
+
+### Diagrama do Processo
+
+![Diagrama do Pipeline](assets/diagrama-fundo-claro.png)
 
 ### Principais Componentes
 Airflow: Orquestração das pipelines.
@@ -112,6 +117,7 @@ Inicie os containers com o comando:
 ```
 docker-compose up -d
 ```
+
 
 #### Executando o Airflow 
 
