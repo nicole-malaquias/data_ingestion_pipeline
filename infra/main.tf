@@ -43,10 +43,8 @@ resource "google_bigquery_table" "table" {
     }
   ])
 
-  time_partitioning {
-    type  = "INTEGER_RANGE"
-    field = "ano"
-
+  range_partitioning {
+    field = "ano"  # Campo obrigatório especificado aqui
     range {
       start    = 1995
       end      = 2100
@@ -54,7 +52,5 @@ resource "google_bigquery_table" "table" {
     }
   }
 
-  clustering {
-    fields = ["ano", "id_regiao"]
-  }
+  clustering = ["ano", "id_regiao"]
 }
