@@ -47,39 +47,19 @@ def transform_data(df: DataFrame) -> DataFrame:
     logging.info("Transformando dados.")
     try:
         df_transformed = df.select(
-            col("ano").cast(IntegerType()),
-            col("sigla_uf").cast(StringType()),
-            col("id_regiao").cast(StringType()),
-            col("id_escola").cast(StringType()),
-            col("escola_publica").cast(IntegerType()),
-            col("desempenho_aluno").cast(StringType())
-        ).na.drop(subset=["ano", "sigla_uf", "desempenho_aluno"]) \
-         .withColumn("update_at", current_timestamp().cast(TimestampType()))
+        col("ano").cast(IntegerType()),
+        col("id_regiao").cast(StringType()),
+        col("escola_publica").cast(IntegerType()),
+        col("desempenho_aluno").cast(StringType()),
+        col("sigla_uf").cast(StringType())
+    ).na.drop(subset=["ano", "sigla_uf", "desempenho_aluno","id_regiao","escola_publica"]) \
+    .withColumn("update_at", current_timestamp().cast(TimestampType()))
 
         logging.info(f"Transformação concluída. Registros: {df_transformed.count()}")
         return df_transformed
     except Exception as e:
         logging.error(f"Erro na transformação: {e}")
         raise
-
-# def transform_data(df: DataFrame) -> DataFrame:
-#     """Transforma os dados extraídos."""
-#     logging.info("Transformando dados.")
-#     try:
-#         df_transformed = df.select(
-#             col("ano").cast(IntegerType()),
-#             col("sigla_uf").cast(StringType()),
-#             col("id_regiao").cast(StringType()),
-#             col("escola_publica").cast(IntegerType()),
-#             col("desempenho_aluno").cast(StringType())
-#         ).na.drop(subset=["ano", "id_regiao", "escola_publica", "desempenho_aluno", "sigla_uf"]) \
-#          .withColumn("update_at", current_timestamp().cast(TimestampType()))
-        
-#         logging.info(f"Transformação concluída. Registros: {df_transformed.count()}")
-#         return df_transformed
-#     except Exception as e:
-#         logging.error(f"Erro na transformação: {e}")
-#         raise
 
 def insert_data_via_load_job(dataframe: DataFrame, table_id: str):
     """Insere dados no BigQuery usando um Load Job."""
@@ -155,7 +135,7 @@ def run_etl():
         df = extract_bigquery_data(spark)
         transformed_df = transform_data(df)
         validate_data(transformed_df)
-        insert_data_via_load_job(transformed_df, 'letrus-451714.baseletrus.aluno_ef_9ano_transformado')
+        insert_data_via_load_job(transformed_df, 'letrus-data.baseletrus.aluno_ef_9ano_transformado')
         spark.stop()
         logging.info("ETL concluído com sucesso.")
     except Exception as e:
@@ -164,7 +144,7 @@ def run_etl():
 
 def run_incremental_etl():
     """Executa o ETL incremental baseado no campo 'ano' com processamento paralelo."""
-    destination_table = "letrus-451714.baseletrus.aluno_ef_9ano_transformado"
+    destination_table = "letrus-data.baseletrus.aluno_ef_9ano_transformado"
     spark = create_spark_session("Incremental_ETL")
     try:
         
