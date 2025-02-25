@@ -1,0 +1,24 @@
+# Ignore a virtual environment
+venv/
+.venv/
+
+# Ignore arquivos de cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore arquivos de configuração e secrets
+.env
+secrets/
+*.json
+
+# Ignore arquivos criados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignore arquivos de logs
+*.log
+
+# Ignore pastas do Airflow
+logs/
+airflow.db

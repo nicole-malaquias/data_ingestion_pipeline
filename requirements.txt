@@ -1,0 +1,8 @@
+pyspark==3.5.0
+google-cloud-bigquery
+google-cloud-storage
+google-auth
+google-auth-oauthlib
+google-api-python-client
+great-expectations==0.15.46
+python-dotenv
