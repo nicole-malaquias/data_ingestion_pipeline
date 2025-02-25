@@ -1,0 +1,66 @@
+# great_expectations.yml
+config_version: 3
+
+# Arquivo para variáveis sensíveis e configurações específicas (não versionado)
+config_variables_file_path: uncommitted/config_variables.yml
+
+# Diretório de plugins para customizações (se necessário)
+plugins_directory: plugins/
+
+# Configuração das datasources
+datasources:
+  spark_datasource:
+    class_name: Datasource
+    execution_engine:
+      class_name: SparkDFExecutionEngine
+    data_connectors:
+      default_runtime_data_connector:
+        class_name: RuntimeDataConnector
+        batch_identifiers:
+          - default_identifier_name
+
+stores:
+  expectations_store:
+    class_name: ExpectationsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: expectations/
+  validations_store:
+    class_name: ValidationsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: uncommitted/validations/
+  evaluation_parameter_store:
+    class_name: EvaluationParameterStore
+  checkpoint_store:
+    class_name: CheckpointStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      suppress_store_backend_id: true
+      base_directory: checkpoints/
+  profiler_store:
+    class_name: ProfilerStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      suppress_store_backend_id: true
+      base_directory: profilers/
+
+expectations_store_name: expectations_store
+validations_store_name: validations_store
+evaluation_parameter_store_name: evaluation_parameter_store
+checkpoint_store_name: checkpoint_store
+
+# Configuração dos Data Docs para visualização das validações e expectativas
+data_docs_sites:
+  local_site:
+    class_name: SiteBuilder
+    show_how_to_buttons: true
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: uncommitted/data_docs/local_site/
+    site_index_builder:
+      class_name: DefaultSiteIndexBuilder
+
+# Estatísticas anônimas de uso (opcional)
+anonymous_usage_statistics:
+  enabled: True
