@@ -137,8 +137,9 @@ No Airflow, ative e execute os DAGs desejados:
 **incremental_fill**: Esta DAG realiza a ingestão incremental, verificando se há dados mais recentes na base pública do governo. Caso sejam identificados novos registros, a DAG realiza a ingestão apenas desses dados, garantindo que o banco de dados permaneça atualizado sem redundâncias.
 
 
+### Diagrama de Fluxo do Pipeline 
 
 
 
-
+![Diagrama de Fluxo ](assets/mermaid-diagram.png)
 
