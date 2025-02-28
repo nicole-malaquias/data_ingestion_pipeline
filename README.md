@@ -62,7 +62,7 @@ Para executar este projeto, é necessário ter os seguintes pré-requisitos inst
 
 * [Docker](https://www.docker.com/get-started/) (necessário para orquestração com Airflow e execução dos containers)
 
-* [Terraform](https://developer.hashicorp.com/terraform/tutorials) (alternativa para não ter que criar a infraestrutura de armazenamento manualmente)
+* [Terraform](https://developer.hashicorp.com/terraform/tutorials/cli/init) (alternativa para não ter que criar a infraestrutura de armazenamento manualmente)
 
 * [Great Expactation](https://maikpaixao.medium.com/data-quality-with-great-expectation-in-python-0908b179f615)(ferramenta que auxilia na qualidade de validação dos dados)
 
@@ -94,7 +94,7 @@ Este projeto utiliza o **[BigQuery](https://support.google.com/cloud/answer/9113
   👉 [Guia para criar uma conta de serviço no GCP](https://support.site24x7.com/portal/en/kb/articles/how-to-create-a-service-account-in-gcp-console)
 
 - 🛠️ **Criando Projeto dentro do Console GCP:** 
-  Apos os passos acima por fim crie um projeto com o nome "letrus". 
+  Apos os passos acima por fim crie um projeto com o nome "letrus-data". 
   👉 [Como de como criar o projeto](https://medium.com/@camila-marquess/criando-um-projeto-no-dbt-utilizando-o-bigquery-c49fc8375aa2#:~:text=Cria%C3%A7%C3%A3o%20do%20Projeto%20no%20GCP&text=D%C3%AA%20um%20nome%20ao%20seu,clique%20em%20continue%20e%20Done.)
 
 
@@ -123,7 +123,7 @@ docker-compose up -d
 
 Assim que todo os containers estiverem *up* acesse [localhost:8000](http://localhost:8080/)
 
-Use as credenciais padrão (se aplicável):
+Use as credenciais padrão:
 - Usuário: airflow
 - Senha: airflow
 
